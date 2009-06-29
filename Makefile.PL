@@ -1,0 +1,21 @@
+
+use strict;
+use warnings;
+
+use ExtUtils::MakeMaker;
+
+WriteMakefile(
+  DISTNAME  => 'Dist-Zilla-Plugin-AutoPrereq',
+  NAME      => 'Dist::Zilla::Plugin::AutoPrereq',
+  AUTHOR    => 'Jerome\ Quelin',
+  ABSTRACT  => 'automatically\ extract\ prereqs\ from\ your\ modules',
+  VERSION   => '0.1.0',
+  EXE_FILES => [ qw() ],
+  (eval { ExtUtils::MakeMaker->VERSION(6.21) } ? (LICENSE => 'perl') : ()),
+  PREREQ_PM    => {
+    "File::Find::Rule" => '0',
+    "Test::More" => '0',
+    "version" => '0',
+    "Moose" => '0',
+  },
+);
