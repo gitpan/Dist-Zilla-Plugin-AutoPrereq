@@ -7,13 +7,14 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '0.1.0';
+our $VERSION = '0.1.1';
 
 # ABSTRACT: automatically extract prereqs from your modules
 
 use strict;
 use warnings;
 
+use Dist::Zilla::Util;
 use Moose;
 use version;
 
@@ -78,10 +79,14 @@ sub _prereqs_in_file {
 
     my %prereqs;
 
+    my $p = Dist::Zilla::Util::Nonpod->_new;
+    $p->read_string( $file->content );
+    my $nonpod = $p->_nonpod;
+
     # quick analysis: find only plain use and require
     my @use_lines =
         grep { /^(?:use|require)\s+/ }
-        split /\n/, $file->content;
+        split /\n/, $nonpod;
 
     foreach my $line ( @use_lines ) {
         $line =~ s/;$//; # trim end of statement
@@ -133,7 +138,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =begin Pod::Coverage
 
