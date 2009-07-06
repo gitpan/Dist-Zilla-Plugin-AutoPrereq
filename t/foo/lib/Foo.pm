@@ -7,10 +7,10 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package Foo;
-our $VERSION = '0.1.1';
+our $VERSION = '0.1.2';
 
 use 5.008;
-use Moose 0.50;
+use Moose 0.50; # comment
 require File::Spec::Functions;
 __END__
 =head1 FOO

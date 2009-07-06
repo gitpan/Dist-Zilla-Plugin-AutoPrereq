@@ -9,7 +9,7 @@ WriteMakefile(
   NAME      => 'Dist::Zilla::Plugin::AutoPrereq',
   AUTHOR    => 'Jerome\ Quelin',
   ABSTRACT  => 'automatically\ extract\ prereqs\ from\ your\ modules',
-  VERSION   => '0.1.1',
+  VERSION   => '0.1.2',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.21) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {
@@ -20,6 +20,6 @@ WriteMakefile(
     "Dist::Zilla" => '0',
     "File::Spec::Functions" => '0',
     "Dist::Zilla::Util" => '0',
-    "Moose" => '0.50',
+    "Moose" => '0',
   },
 );

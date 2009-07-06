@@ -9,20 +9,16 @@ meta-spec:
   version: 1.4
 name: Dist-Zilla-Plugin-AutoPrereq
 requires:
-  Bar: 0
-  Data::Dumper: 0
   Dist::Zilla: 0
   Dist::Zilla::Util: 0
   ExtUtils::MakeMaker: 0
   File::Find::Rule: 0
   File::Spec::Functions: 0
-  Foo: 0
-  Frobnizer: 1.23
-  Moose: 0.50
+  Moose: 0
   Test::More: 0
   perl: 5.008
   version: 0
 resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-AutoPrereq/
   repository: http://github.com/jquelin/dist-zilla-plugin-autoprereq/
-version: 0.1.1
+version: 0.1.2
