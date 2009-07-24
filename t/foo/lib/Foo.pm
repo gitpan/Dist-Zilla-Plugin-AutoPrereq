@@ -7,14 +7,17 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package Foo;
-our $VERSION = '0.1.2';
+our $VERSION = '0.2.0';
 
 use 5.008;
-use Moose 0.50; # comment
-require File::Spec::Functions;
+use DZPA::Foo 0.50; # comment
+with 'DZPA::Role';
+use DZPA::Skip::Blah;
+require DZPA::Bar;
 __END__
 =head1 FOO
 
 this pod should not be taken in to account, with:
 use fake
 require blah
+with 'fubar'
