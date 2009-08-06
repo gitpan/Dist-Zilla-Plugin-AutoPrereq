@@ -7,11 +7,12 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package Foo;
-our $VERSION = '0.2.0';
+our $VERSION = '0.3.0';
 
 use 5.008;
 use DZPA::Foo 0.50; # comment
 with 'DZPA::Role';
+extends 'DZPA::Base';
 use DZPA::Skip::Blah;
 require DZPA::Bar;
 __END__
