@@ -7,7 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '0.3.0';
+our $VERSION = '0.3.1';
 
 # ABSTRACT: automatically extract prereqs from your modules
 
@@ -160,7 +160,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =begin Pod::Coverage
 

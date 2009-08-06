@@ -7,7 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package Foo;
-our $VERSION = '0.3.0';
+our $VERSION = '0.3.1';
 
 use 5.008;
 use DZPA::Foo 0.50; # comment
