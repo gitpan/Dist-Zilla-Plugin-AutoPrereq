@@ -6,13 +6,14 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 # 
-package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '0.3.1';
-
-# ABSTRACT: automatically extract prereqs from your modules
-
 use strict;
 use warnings;
+
+package Dist::Zilla::Plugin::AutoPrereq;
+our $VERSION = '1.093000';
+
+
+# ABSTRACT: automatically extract prereqs from your modules
 
 use Dist::Zilla::Util;
 use Moose;
@@ -32,20 +33,23 @@ sub prereq {
     my $self = shift;
     my $files = $self->zilla->files;
 
-    # don't count modules under the dist namespace
-    my $dist  = $self->zilla->name;
-    $dist =~ s/-/::/g;
-
     my %prereqs;
+    my @modules;
     foreach my $file ( @$files ) {
         # parse only perl files
         next unless $file->name    =~ /\.(?:pm|pl|t)$/i
             || $file->content =~ /^#!(?:.*)perl(?:$|\s)/;
 
+        # store module name, to trim it from require list later on
+        my $module = $file->name;
+        $module =~ s{^lib/}{};
+        $module =~ s{\.pm$}{};
+        $module =~ s{/}{::}g;
+        push @modules, $module;
+
         # parse a file, and merge with existing prereqs
         my %fprereqs = $self->_prereqs_in_file($file);
         foreach my $module ( keys %fprereqs ) {
-            next if $module =~ /^$dist/;
             my $version = $fprereqs{$module};
 
             if ( exists $prereqs{$module} ) {
@@ -66,6 +70,9 @@ sub prereq {
             }
         }
     }
+
+    # remove prereqs shipped with current dist
+    delete @prereqs{ @modules };
 
     # remove prereqs from skiplist
     if ( $self->has_skip && $self->skip ) {
@@ -160,7 +167,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 0.3.1
+version 1.093000
 
 =begin Pod::Coverage
 

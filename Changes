@@ -1,5 +1,13 @@
 Revision history for Dist::Zilla::Plugin::AutoPrereq
 
+1.093000  2009-10-27 11:02:12 UTC
+ - trim all modules shipped by dist from prereqs, not only modules under dist
+   namespace. useful when dist ships various namespaces (reported by dams)
+ - corrollary: don't trim all modules under dist namespace, only the ones
+   shipped by dist.
+
+**
+
 0.3.1 Thu Aug  6 15:48:22 CEST 2009
  - fix manifest
 

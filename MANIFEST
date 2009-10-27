@@ -1,3 +1,4 @@
+Build.PL
 Changes
 LICENSE
 MANIFEST
@@ -8,9 +9,10 @@ dist.ini
 lib/Dist/Zilla/Plugin/AutoPrereq.pm
 t/00-compile.t
 t/1-autoprereq.t
+t/author-critic.t
 t/foo/bin/foobar
 t/foo/dist.ini
-t/foo/lib/Foo.pm
+t/foo/lib/DZPA/Main.pm
 t/release-meta-yaml.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t

@@ -2,24 +2,30 @@
 abstract: 'automatically extract prereqs from your modules'
 author:
   - 'Jerome Quelin'
-generated_by: 'Dist::Zilla::Plugin::MetaYAML version '
+generated_by: 'Dist::Zilla version 1.092680'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Dist-Zilla-Plugin-AutoPrereq
+provides:
+  Dist::Zilla::Plugin::AutoPrereq:
+    file: lib/Dist/Zilla/Plugin/AutoPrereq.pm
+    version: 1.093000
 requires:
   Dist::Zilla: 0
   Dist::Zilla::Role::FixedPrereqs: 0
   Dist::Zilla::Util: 0
-  File::Find::Rule: 0
+  English: 0
+  ExtUtils::MakeMaker: 0
+  File::Find: 0
   File::Spec::Functions: 0
+  Module::Build: 0
   Moose: 0
   Test::More: 0
-  Test::Script: 0
   perl: 5.008
   version: 0
 resources:
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-AutoPrereq/
   repository: http://github.com/jquelin/dist-zilla-plugin-autoprereq/
-version: 0.3.1
+version: 1.093000

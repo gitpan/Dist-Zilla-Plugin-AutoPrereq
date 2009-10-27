@@ -7,5 +7,12 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 # 
+
+# require in a script
 use DZPA::Fubar;
+
+# module shipped by dist
+use DZPA::Main;
+
+# DZPA::Skip should be trimmed
 require DZPA::Skip::Foo;
