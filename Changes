@@ -1,6 +1,9 @@
 Revision history for Dist::Zilla::Plugin::AutoPrereq
 
-1.093000  2009-10-27 11:02:12 UTC
+1.093060  2009-11-02 13:03:29 UTC
+ - extracts indented require / use statements
+
+1.093000 Tue Oct 27 12:02:29 2009
  - trim all modules shipped by dist from prereqs, not only modules under dist
    namespace. useful when dist ships various namespaces (reported by dams)
  - corrollary: don't trim all modules under dist namespace, only the ones

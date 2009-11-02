@@ -7,7 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package DZPA::Main;
-our $VERSION = '1.093000';
+our $VERSION = '1.093060';
 
 
 
@@ -15,10 +15,10 @@ our $VERSION = '1.093000';
 use 5.008;
 
 # under DZPA::, but not shipped by the dist
-use DZPA::Blah;
+use DZPA::NotInDist;
 
 # minimum version + comment after the semicolon.
-use DZPA::Foo 0.50; # comment
+use DZPA::MinVerComment 0.50; # comment
 
 # Moose features
 with 'DZPA::Role';
@@ -28,8 +28,13 @@ extends 'DZPA::Base';
 use DZPA::Skip::Blah;
 
 # require in a module
-require DZPA::Bar;
+require DZPA::ModRequire;
 
+# indented
+{
+    use DZPA::IndentedUse 0.13;
+    require DZPA::IndentedRequire 3.45;
+}
 __END__
 =head1 FOO
 

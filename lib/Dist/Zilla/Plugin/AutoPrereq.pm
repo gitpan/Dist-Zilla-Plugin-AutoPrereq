@@ -10,7 +10,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '1.093000';
+our $VERSION = '1.093060';
 
 
 # ABSTRACT: automatically extract prereqs from your modules
@@ -109,9 +109,10 @@ sub _prereqs_in_file {
 
     # quick analysis: find only plain use and require
     my @use_lines =
-        grep { /^(?:use|require)\s+/ }
+        grep { /^\s*(?:use|require)\s+/ }
         @lines;
     foreach my $line ( @use_lines ) {
+        $line =~ s/^\s+//; # trim beginning whitespaces
         $line =~ s/;.*$//; # trim end of statement
         my (undef, $module, $version) = split /\s+/, $line;
 
@@ -167,7 +168,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 1.093000
+version 1.093060
 
 =begin Pod::Coverage
 
