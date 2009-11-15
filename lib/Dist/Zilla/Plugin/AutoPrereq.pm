@@ -6,17 +6,19 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 # 
+use 5.008;
 use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '1.093060';
+our $VERSION = '1.093190';
 
 
 # ABSTRACT: automatically extract prereqs from your modules
 
 use Dist::Zilla::Util;
 use Moose;
+use MooseX::Has::Sugar;
 use version;
 
 with 'Dist::Zilla::Role::FixedPrereqs';
@@ -24,7 +26,7 @@ with 'Dist::Zilla::Role::FixedPrereqs';
 # -- attributes
 
 # skiplist - a regex
-has skip => ( is=>'ro', predicate=>'has_skip' );
+has skip => ( ro, predicate=>'has_skip' );
 
 
 # -- public methods
@@ -159,7 +161,6 @@ __PACKAGE__->meta->make_immutable;
 
 
 
-
 =pod
 
 =head1 NAME
@@ -168,13 +169,9 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 1.093060
+version 1.093190
 
-=begin Pod::Coverage
-
-prereq
-
-=end Pod::Coverage
+=for Pod::Coverage prereq
 
 =head1 SYNOPSIS
 
@@ -201,7 +198,7 @@ modules and scripts.
 
 =item * L<Moose> roles included with the C<with> keyword.
 
-=back 
+=back
 
 If some prereqs are not found, you can still add them manually with the
 L<Dist::Zilla::Plugin::Prereq> plugin.
@@ -217,17 +214,43 @@ The module accept the following options:
 =item * skip: a regex that will remove any matching modules found
 from prereqs.
 
-=back 
+=back
 
-=head1 BUGS
+=head1 SEE ALSO
 
-Please report any bugs or feature request to
-C<< <bug-dist-zilla-plugin-autoprereq@rt.cpan.org> >>, or through the web interface
-at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Dist-Zilla-Plugin-AutoPrereq>.
+You can look for information on this module at:
+
+=over 4
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/Dist-Zilla-Plugin-AutoPrereq>
+
+=item * See open / report bugs
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Dist-Zilla-Plugin-AutoPrereq>
+
+=item * Mailing-list (same as L<Dist::Zilla>)
+
+L<http://www.listbox.com/subscribe/?list_id=139292>
+
+=item * Git repository
+
+L<http://github.com/jquelin/dist-zilla-plugin-autoprereq.git>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Dist-Zilla-Plugin-AutoPrereq>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Dist-Zilla-Plugin-AutoPrereq>
+
+=back
 
 =head1 AUTHOR
 
-  Jerome Quelin
+Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 
@@ -236,8 +259,7 @@ This software is copyright (c) 2009 by Jerome Quelin.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=cut 
-
+=cut
 
 
 __END__

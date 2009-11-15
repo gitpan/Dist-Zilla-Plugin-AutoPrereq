@@ -1,0 +1,21 @@
+---
+abstract: 'dumb module to test DZPA'
+author:
+  - foobar
+generated_by: 'Dist::Zilla version 1.093140'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Foo
+requires:
+  DZPA::Base: 0
+  DZPA::IndentedRequire: 3.45
+  DZPA::IndentedUse: 0.13
+  DZPA::MinVerComment: 0.50
+  DZPA::ModRequire: 0
+  DZPA::NotInDist: 0
+  DZPA::Role: 0
+  DZPA::ScriptUse: 0
+  perl: 5.008
+version: 1.23
