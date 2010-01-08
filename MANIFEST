@@ -3,17 +3,12 @@ Changes
 LICENSE
 MANIFEST
 META.yml
-Makefile.PL
 README
 dist.ini
 lib/Dist/Zilla/Plugin/AutoPrereq.pm
 t/00-compile.t
 t/1-autoprereq.t
 t/author-critic.t
-t/foo/Foo-1.23/META.yml
-t/foo/Foo-1.23/bin/foobar
-t/foo/Foo-1.23/dist.ini
-t/foo/Foo-1.23/lib/DZPA/Main.pm
 t/foo/bin/foobar
 t/foo/dist.ini
 t/foo/lib/DZPA/Main.pm

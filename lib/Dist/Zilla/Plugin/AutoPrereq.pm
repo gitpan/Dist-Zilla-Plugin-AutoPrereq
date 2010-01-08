@@ -11,9 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '1.093190';
-
-
+our $VERSION = '1.100080';
 # ABSTRACT: automatically extract prereqs from your modules
 
 use Dist::Zilla::Util;
@@ -169,9 +167,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 1.093190
-
-=for Pod::Coverage prereq
+version 1.100080
 
 =head1 SYNOPSIS
 
@@ -216,6 +212,8 @@ from prereqs.
 
 =back
 
+=for Pod::Coverage prereq
+
 =head1 SEE ALSO
 
 You can look for information on this module at:
@@ -236,7 +234,7 @@ L<http://www.listbox.com/subscribe/?list_id=139292>
 
 =item * Git repository
 
-L<http://github.com/jquelin/dist-zilla-plugin-autoprereq.git>
+L<http://github.com/jquelin/dist-zilla-plugin-autoprereq>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
@@ -250,7 +248,7 @@ L<http://cpanratings.perl.org/d/Dist-Zilla-Plugin-AutoPrereq>
 
 =head1 AUTHOR
 
-Jerome Quelin
+  Jerome Quelin
 
 =head1 COPYRIGHT AND LICENSE
 

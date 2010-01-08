@@ -7,9 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package DZPA::Main;
-our $VERSION = '1.093190';
-
-
+our $VERSION = '1.100080';
 # ABSTRACT: dumb module to test DZPA
 
 # perl minimum version
