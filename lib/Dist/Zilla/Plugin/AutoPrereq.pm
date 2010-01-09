@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '1.100080';
+our $VERSION = '1.100090';
 # ABSTRACT: automatically extract prereqs from your modules
 
 use Dist::Zilla::Util;
@@ -118,6 +118,7 @@ sub _prereqs_in_file {
 
         # trim common pragmata
         next if $module =~ /^(lib|strict|warnings)$/;
+        next if $module =~ /[^\.:\w]/;
 
         if ( _looks_like_version($module) ) {
             # perl minimum version is a bit special
@@ -167,7 +168,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 1.100080
+version 1.100090
 
 =head1 SYNOPSIS
 

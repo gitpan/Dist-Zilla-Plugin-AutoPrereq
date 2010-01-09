@@ -7,7 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package DZPA::Main;
-our $VERSION = '1.100080';
+our $VERSION = '1.100090';
 # ABSTRACT: dumb module to test DZPA
 
 # perl minimum version
@@ -34,6 +34,13 @@ require DZPA::ModRequire;
     use DZPA::IndentedUse 0.13;
     require DZPA::IndentedRequire 3.45;
 }
+
+use DZPA::IgnoreAPI
+    require => 1; # module pluggable has such an api
+print qw{
+    use !!
+};
+
 __END__
 =head1 FOO
 

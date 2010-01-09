@@ -15,7 +15,7 @@ name: Dist-Zilla-Plugin-AutoPrereq
 provides:
   Dist::Zilla::Plugin::AutoPrereq:
     file: lib/Dist/Zilla/Plugin/AutoPrereq.pm
-    version: 1.100080
+    version: 1.100090
 requires:
   Dist::Zilla: 0
   Dist::Zilla::Role::FixedPrereqs: 0
@@ -34,4 +34,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-AutoPrereq/
   repository: http://github.com/jquelin/dist-zilla-plugin-autoprereq/
-version: 1.100080
+version: 1.100090
