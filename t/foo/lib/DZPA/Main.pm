@@ -7,7 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package DZPA::Main;
-our $VERSION = '1.100090';
+our $VERSION = '1.100130';
 # ABSTRACT: dumb module to test DZPA
 
 # perl minimum version
@@ -21,7 +21,13 @@ use DZPA::MinVerComment 0.50; # comment
 
 # Moose features
 with 'DZPA::Role';
-extends 'DZPA::Base';
+extends 'DZPA::Base::Moose1', 'DZPA::Base::Moose2';
+
+# inheritance
+use base "DZPA::Base::base1";
+use base qw{ DZPA::Base::base2 DZPA::Base::base3 };
+use parent "DZPA::Base::parent1";
+use parent qw{ DZPA::Base::parent2 DZPA::Base::parent3 };
 
 # DZPA::Skip should be trimmed
 use DZPA::Skip::Blah;

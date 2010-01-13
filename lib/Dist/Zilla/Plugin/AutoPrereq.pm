@@ -6,17 +6,18 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 # 
-use 5.008;
+use 5.010;
 use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '1.100090';
+our $VERSION = '1.100130';
 # ABSTRACT: automatically extract prereqs from your modules
 
 use Dist::Zilla::Util;
 use Moose;
 use MooseX::Has::Sugar;
+use PPI;
 use version;
 
 with 'Dist::Zilla::Role::FixedPrereqs';
@@ -105,38 +106,64 @@ sub _prereqs_in_file {
 
     my $p = Dist::Zilla::Util::Nonpod->_new;
     $p->read_string( $file->content );
-    my @lines = split /\n/, $p->_nonpod;
+    my $content = $p->_nonpod;
+    my $doc = PPI::Document->new( \$content );
 
-    # quick analysis: find only plain use and require
-    my @use_lines =
-        grep { /^\s*(?:use|require)\s+/ }
-        @lines;
-    foreach my $line ( @use_lines ) {
-        $line =~ s/^\s+//; # trim beginning whitespaces
-        $line =~ s/;.*$//; # trim end of statement
-        my (undef, $module, $version) = split /\s+/, $line;
-
-        # trim common pragmata
-        next if $module =~ /^(lib|strict|warnings)$/;
-        next if $module =~ /[^\.:\w]/;
-
-        if ( _looks_like_version($module) ) {
-            # perl minimum version is a bit special
-            $prereqs{perl} = $module;
-        } else {
-            $prereqs{ $module } = _looks_like_version($version) ? $version : 0;
+    # regular use and require
+    my $includes = $doc->find('Statement::Include');
+    foreach my $node ( @$includes ) {
+        # minimum perl version
+        if ( $node->version ) {
+            $prereqs{perl} = $node->version;
+            next;
         }
+
+        # skipping pragamata
+        next if $node->module ~~ [ qw{ strict warnings lib } ];
+
+        if ( $node->module ~~ [ qw{ base parent } ] ) {
+            # the content is in the 5th token
+            my $meat = $node->child(4);
+            my @parents = $meat->isa('PPI::Token::QuoteLike::Words')
+                ? ( $meat->literal )
+                : ( $meat->string  );
+            @prereqs{ @parents } = (0) x @parents;
+
+            # base is in perl core, parent isn't
+            next if $node->module eq 'base';
+        }
+
+        # regular modules
+        my $version = $node->module_version
+            ? $node->module_version->content
+            : 0;
+        $prereqs{ $node->module } = $version;
     }
 
-    # add moose specifics
+    # for moose specifics, let's fetch top-level statements
+    my @statements =
+        grep { $_->child(0)->isa('PPI::Token::Word') }
+        grep { ref($_) eq 'PPI::Statement' } # no ->isa()
+        $doc->children;
+
+    # roles: with ...
     my @roles =
-        map { /^(?:with|extends)\s+['"]([\w:]+)['"]/ ? ($1) : () }
-        @lines;
+        map  { $_->child(2)->string }
+        grep { $_->child(0)->literal eq 'with' }
+        @statements;
     @prereqs{ @roles } = (0) x @roles;
+
+    # inheritance: extends ...
+    my @bases =
+        map  { $_->string }
+        grep { $_->isa('PPI::Token::Quote') }
+        map  { $_->children }
+        grep { $_->child(0)->literal eq 'extends' }
+        @statements;
+    @prereqs{ @bases } = (0) x @bases;
 
     return %prereqs;
 }
-
 
 
 # -- private subs
@@ -153,7 +180,6 @@ sub _looks_like_version {
 }
 
 
-
 no Moose;
 __PACKAGE__->meta->make_immutable;
 1;
@@ -168,7 +194,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 1.100090
+version 1.100130
 
 =head1 SYNOPSIS
 
@@ -182,16 +208,18 @@ In your F<dist.ini>:
 This plugin will extract loosely your distribution prerequisites from
 your files.
 
-The extraction may not be perfect, since it will only find the
-following prereqs:
+The extraction may not be perfect but tries to do its best. It will
+currently find the following prereqs:
 
 =over 4
 
 =item * plain lines beginning with C<use> or C<require> in your perl
-modules and scripts.
+modules and scripts. This includes minimum perl version.
 
-=item * L<Moose> inheritance declared with the C<extends> keyword
-(warning: only the first one is currently extracted).
+=item * regular inheritance declated with the C<base> and C<parent>
+pragamata.
+
+=item * L<Moose> inheritance declared with the C<extends> keyword.
 
 =item * L<Moose> roles included with the C<with> keyword.
 
@@ -200,9 +228,10 @@ modules and scripts.
 If some prereqs are not found, you can still add them manually with the
 L<Dist::Zilla::Plugin::Prereq> plugin.
 
-It will trim the following pragamata: C<strict>, C<warnings> and C<lib>.
-It will also trim the modules under your dist namespace (eg: for
-C<Dist-Zilla>, it will trim all C<Dist::Zilla::*> prereqs found.
+It will trim the following pragamata: C<strict>, C<warnings>, C<base>
+and C<lib>. However, C<parent> is kept, since it's not in a core module.
+
+It will also trim the modules shipped within your dist.
 
 The module accept the following options:
 
@@ -262,3 +291,4 @@ the same terms as the Perl 5 programming language system itself.
 
 
 __END__
+

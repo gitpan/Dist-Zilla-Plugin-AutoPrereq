@@ -5,10 +5,11 @@ MANIFEST
 META.yml
 README
 dist.ini
+examples/dist.ini
 lib/Dist/Zilla/Plugin/AutoPrereq.pm
 t/00-compile.t
-t/1-autoprereq.t
 t/author-critic.t
+t/autoprereq.t
 t/foo/bin/foobar
 t/foo/dist.ini
 t/foo/lib/DZPA/Main.pm
