@@ -22,6 +22,7 @@ my %module_build_args = (
                                        'Test::More' => 0,
                                        'File::Find' => 0,
                                        'Dist::Zilla' => 0,
+                                       'File::Temp' => 0,
                                        'Path::Class' => 0,
                                        'Test::Deep' => 0,
                                        'Moose' => 0,

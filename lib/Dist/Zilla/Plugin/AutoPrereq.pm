@@ -11,7 +11,7 @@ use strict;
 use warnings;
 
 package Dist::Zilla::Plugin::AutoPrereq;
-our $VERSION = '1.100130';
+our $VERSION = '1.100460';
 # ABSTRACT: automatically extract prereqs from your modules
 
 use Dist::Zilla::Util;
@@ -110,7 +110,7 @@ sub _prereqs_in_file {
     my $doc = PPI::Document->new( \$content );
 
     # regular use and require
-    my $includes = $doc->find('Statement::Include');
+    my $includes = $doc->find('Statement::Include') || [];
     foreach my $node ( @$includes ) {
         # minimum perl version
         if ( $node->version ) {
@@ -194,7 +194,7 @@ Dist::Zilla::Plugin::AutoPrereq - automatically extract prereqs from your module
 
 =head1 VERSION
 
-version 1.100130
+version 1.100460
 
 =head1 SYNOPSIS
 

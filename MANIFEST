@@ -12,6 +12,7 @@ t/author-critic.t
 t/autoprereq.t
 t/foo/bin/foobar
 t/foo/dist.ini
+t/foo/lib/DZPA/Empty.pm
 t/foo/lib/DZPA/Main.pm
 t/release-meta-yaml.t
 t/release-pod-coverage.t
