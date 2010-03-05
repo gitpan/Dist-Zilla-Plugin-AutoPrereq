@@ -6,7 +6,7 @@ build_requires:
   Module::Build: 0.3601
 configure_requires:
   Module::Build: 0.3601
-generated_by: 'Dist::Zilla version 1.100160'
+generated_by: 'Dist::Zilla version 1.100600'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,9 +15,8 @@ name: Dist-Zilla-Plugin-AutoPrereq
 provides:
   Dist::Zilla::Plugin::AutoPrereq:
     file: lib/Dist/Zilla/Plugin/AutoPrereq.pm
-    version: 1.100460
+    version: 1.100640
 requires:
-  Data::Dumper: 0
   Dist::Zilla: 0
   Dist::Zilla::Role::FixedPrereqs: 0
   Dist::Zilla::Util: 0
@@ -29,8 +28,10 @@ requires:
   MooseX::Has::Sugar: 0
   PPI: 0
   Path::Class: 0
+  Perl::PrereqScanner: 0.100521
   Test::Deep: 0
   Test::More: 0
+  Version::Requirements: 0.100630
   YAML: 0
   perl: 5.010
   version: 0
@@ -38,4 +39,4 @@ resources:
   MailingList: http://www.listbox.com/subscribe/?list_id=139292
   homepage: http://search.cpan.org/dist/Dist-Zilla-Plugin-AutoPrereq/
   repository: http://github.com/jquelin/dist-zilla-plugin-autoprereq/
-version: 1.100460
+version: 1.100640

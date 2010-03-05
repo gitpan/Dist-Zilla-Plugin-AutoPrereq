@@ -7,7 +7,7 @@
 # the same terms as the Perl 5 programming language system itself.
 # 
 package DZPA::Main;
-our $VERSION = '1.100460';
+our $VERSION = '1.100640';
 # ABSTRACT: dumb module to test DZPA
 
 # look, no prereq! this used to crash autoprereq
